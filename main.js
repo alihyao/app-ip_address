@@ -38,7 +38,6 @@ const IPCIDR = require('ip-cidr');
 
 
 
-
 /*
   This section is used to test function and log any errors.
   We will make several positive and negative tests.
@@ -56,7 +55,7 @@ class IpAddress {
     // under Documentation -> Developer Guides -> Log Class Guide
     log.info('Starting the IpAddress product.');
   }
-   getFirstIpAddress(cidrStr, callback) {
+  getFirstIpAddress(cidrStr, callback) {
 
   // Initialize return arguments for callback
   let firstIpAddress = null;
@@ -87,5 +86,6 @@ class IpAddress {
   // data as the second argument to the callback function.
   return callback(firstIpAddress, callbackError);
 }
+
 }
 module.exports = new IpAddress;
