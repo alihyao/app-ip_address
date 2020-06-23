@@ -36,6 +36,8 @@ const IPCIDR = require('ip-cidr');
  * @return {*} (ipv6Address) - An IPv6 address string or null if a run-time problem was detected.
  */
 
+
+
 /*
   This section is used to test function and log any errors.
   We will make several positive and negative tests.
@@ -84,6 +86,6 @@ class IpAddress {
   // data as the second argument to the callback function.
   return callback(firstIpAddress, callbackError);
 }
+
 }
 module.exports = new IpAddress;
-

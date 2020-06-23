@@ -23,29 +23,7 @@ const { getIpv4MappedIpv6Address } = require(path.join(__dirname, 'ipv6.js'));
 */
 const IPCIDR = require('ip-cidr');
 
-/**
- * Calculate and return the first host IP address from a CIDR subnet.
- * @param {string} cidrStr - The IPv4 subnet expressed
- *                 in CIDR format.
- * @param {callback} callback - A callback function.
- * @return {string} (firstIpAddress) - An IPv4 address.
- */
-/**
- * Calculates an IPv4-mapped IPv6 address.
- * @param {string} ipv4 - An IPv4 address in dotted-quad format.
- * @return {*} (ipv6Address) - An IPv6 address string or null if a run-time problem was detected.
- */
 
-
-
-/*
-  This section is used to test function and log any errors.
-  We will make several positive and negative tests.
-*/
-/*
-  This section is used to test function and log any errors.
-  We will make several positive and negative tests.
-*/
 class IpAddress {
   constructor() {
     // IAP's global log object is used to output errors, warnings, and other
@@ -55,7 +33,14 @@ class IpAddress {
     // under Documentation -> Developer Guides -> Log Class Guide
     log.info('Starting the IpAddress product.');
   }
-  getFirstIpAddress(cidrStr, callback) {
+  /**
+ * Calculate and return the first host IP address from a CIDR subnet.
+ * @param {string} cidrStr - The IPv4 subnet expressed
+ *                 in CIDR format.
+ * @param {callback} callback - A callback function.
+ * @return {string} (firstIpAddress) - An IPv4 address.
+ */
+getFirstIpAddress(cidrStr, callback) {
 
   // Initialize return arguments for callback
   let firstIpAddress = null;
@@ -84,8 +69,24 @@ class IpAddress {
   // Node.js convention is to pass error data as the first argument to a callback.
   // The IAP convention is to pass returned data as the first argument and error
   // data as the second argument to the callback function.
-  return callback(firstIpAddress, callbackError);
+
+  if (firstIpAddress==null) {
+    var ip_addresses = {
+      "ipv4": null,
+      "ipv6": null
+    }
+  }
+  else {
+    var secondIpAddress = getIpv4MappedIpv6Address(firstIpAddress);
+    // console.log("IPV6 address is here : " + secondIpAddress)
+    var ip_addresses = {
+        "ipv4": firstIpAddress,
+        "ipv6": secondIpAddress
+  }
+}
+  return callback(JSON.stringify(ip_addresses), callbackError);
+}
 }
 
-}
+
 module.exports = new IpAddress;
