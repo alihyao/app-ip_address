@@ -1,4 +1,6 @@
-cation",
+{
+  "id": "@acme/app-ip_address",
+  "type": "Application",
   "title": "ip-address",
   "displayName": "IP Address",
   "export": "IpAddress",
